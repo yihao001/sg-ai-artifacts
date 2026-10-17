@@ -5,6 +5,24 @@ There are 2 main problems that most existing projects try to address:
 2. Forecasting: How might this change in the coming day(s)? Should an upcoming outdoor event be cancelled? 
 
 
+## Table of Contents
+
+- [Data Sources](#data-sources)
+  - [Official (NEA)](#official-nea)
+    - [Real-time measurements](#real-time-measurements)
+    - [Forecast](#forecast)
+  - [Community-sourced](#community-sourced)
+    - [Real-time measurements](#real-time-measurements-1)
+  - [Others](#others)
+    - [Real-time measurements](#real-time-measurements-2)
+    - [Forecasting](#forecasting)
+- [Project Examples](#project-examples)
+  - [Other fun projects](#other-fun-projects)
+  - [Interesting information](#interesting-information)
+- [Gaps](#gaps)
+- [Acknowledgements](#acknowledgements)
+
+
 ## Data Sources
 
 ### Official (NEA)
