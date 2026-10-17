@@ -9,6 +9,8 @@ What does this repo offer?
 4. Project demo/examples
 5. Unexplored problems / project ideas that are waiting for your contributions! 😄
 
+Basically, what's different is we've actually used the resources before so we can tell you more about the usage experience, what to avoid, etc. so that you don't make the same mistakes.
+
 # Sitemap
 - `README.md` - landing page
 - `overview.md` - cross-application resources
