@@ -74,7 +74,7 @@ Additional notes
     4. [Their methodologies vary](https://www.channelnewsasia.com/singapore/haze-psi-aqi-air-quality-pm25-6452896) so you have to be careful:
         1. The sensors actually record raw concentration (i.e. same units as what NEA reports), but the website [converts](https://aqicn.org/calculator/) it to AQI via [`instantcast`](https://aqicn.org/faq/2015-03-15/air-quality-nowcast-a-beginners-guide/). AQI follows a difference scale. You can easily undo this to get the raw numbers back, it's just 'segmented' linear interpolation (i.e. AQI scale is divided into bins because we want to determine which range of values is considered good/unhealthy/hazardous. Each bin has a range of concentration (e.g. 35.5-55.4) and a range of AQI (e.g. 101-150), so if the concentration is in the middle of the range i.e., 45, you simply get AQI of ~125 because that's the middle too).
         2. Basically, the official concentration-to-AQI conversion uses a 24-hour window which clearly is not what laypeople like (people get angry when what they experience with their own eyes/nose is not reflected in the data; by the time the AQI alerts us we already took in hours of smoke - too late!). But for health advisories, the scientific studies they are based on use such windows. There are now studies that use smaller windows but it will take some time for *science* to come to a consensus so it's down to individuals to make informed decisions (i.e. official bodies aren't likely to make recommendations *not backed by science* and take responsibility for it) for ourselves.
-4. Uptime: Usually good, but their website can go down when the whole SG population is visiting their website (e.g. it was unconscious for a while on 17 Oct 2026 afternoon). Their API remains strong though!
+4. Uptime: Usually good, but their website can go down when the whole SG population is visiting their website (e.g. it was unavailable for a while on 17 Oct 2026 afternoon). Their API remains strong though!
 
 
 ### Others
@@ -130,8 +130,9 @@ Additional notes
 
 ## Gaps
 
-1. Accuracy of the forecasts is not often well quantified
-2. Make community-sourced readings more robust (but AQICN doesn't allow their data to be "redistributed as cached or archived data" 🤷)
+1. Accuracy of the forecasts is not often well quantified, model information is rarely reported.
+2. No one has tried more granular forecasts beyond vague regions (i.e. East/West/North/South/Central isn't too useful ; town-level would have been better and not impossible since we have granular community-sourced data)
+3. Make community-sourced readings more robust (but AQICN doesn't allow their data to be "redistributed as cached or archived data" 🤷)
 
 
 ## Acknowledgements
