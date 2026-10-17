@@ -29,8 +29,8 @@ There are 2 main problems that most existing projects try to address:
 
 #### Real-time measurements
 
-- [1hr PM2.5](https://data.gov.sg/datasets/d_e1058d6974c877257e32048ab128ad83/view) (concentration, in µg/m3) - website claims "Updated every 15 minutes" but from observation it seems to be updated only every hour despite `updatedTimestamp` changing every 15 minutes. So unfortunately, it isn't *that* real-time. Note that this is **NOT an instantaneous reading**, it's an average over the past 60 minutes but its underlying sampling frequency is unclear. 
-- [24hr PSI](https://data.gov.sg/datasets/d_fe37906a0182569d891506e815e819b7/view) - same issue as above; provides overall PSI readings as well as its constituents, out of which PM10 is probably of more interest since the others are often way below WHO guidelines.
+- [1-hr PM2.5](https://data.gov.sg/datasets/d_e1058d6974c877257e32048ab128ad83/view) (concentration, in µg/m3) - website claims "Updated every 15 minutes" but from observation it seems to be updated only every hour despite `updatedTimestamp` changing every 15 minutes. So unfortunately, it isn't *that* real-time. Note that this is **NOT an instantaneous reading**, it's an average over the past 60 minutes but its underlying sampling frequency is unclear. 
+- [24-hr PSI](https://data.gov.sg/datasets/d_fe37906a0182569d891506e815e819b7/view) - same issue as above; provides overall PSI readings as well as its constituents, out of which PM10 is probably of more interest since the others are often way below WHO guidelines.
 
 Additional notes (for both endpoints)
 1. Granularity is limited to 5 regions (North, South, East, West, Central), but only an arbitrary lat/long coordinate is provided for each region (i.e. no details about how boundary is drawn). 
@@ -102,9 +102,9 @@ Additional notes
 - Did backtesting! 
 
 [hazesg.fyi](https://hazesg.fyi/)
-- Chinese translations, larger font size for seniors
 - 12 hour forecast
 - CADR calculator 
+- Chinese translations, larger font size for seniors
 
 [hazenow.app](https://hazenow.app/)
 - 5-day forecast (derived from [Open-Meteo](https://open-meteo.com/) and [WeatherNext 3](https://deepmind.google/science/weathernext/))
