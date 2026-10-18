@@ -52,7 +52,7 @@ As of 17/10/26, NEA's haze microsite now shows this [in an image](https://www.ha
 
 **AirGradient**
 
-(tbc!)
+
 
 **AQICN** 
 
@@ -96,13 +96,18 @@ Additional notes
 
 > Projects with unique features not in official sources
 
-
 [hazynot.sg](https://hazynot.sg/)
 - Multi-day forecast (based on satellite imaging of fires and smoke, wind and rain)
 - Did backtesting! 
 
+[hazelah.app](https://www.hazelah.app/map)
+- 5-day forecast (derived from Open-Meteo)
+- Shows the trend for number of hotspots per day
+- Live view (ground and satellite photos), cigarette equivalent, News
+
+
 [hazesg.fyi](https://hazesg.fyi/)
-- 12 hour forecast
+- 12-hour forecast
 - CADR calculator 
 - Chinese translations, larger font size for seniors
 
