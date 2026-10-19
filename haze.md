@@ -4,7 +4,6 @@ There are 2 main problems that most existing projects try to address:
 1. Real-time measures: What is the current air quality?
 2. Forecasting: How might this change in the coming day(s)? Should an upcoming outdoor event be cancelled? 
 
-
 ## Table of Contents
 
 - [Data Sources](#data-sources)
@@ -33,13 +32,13 @@ There are 2 main problems that most existing projects try to address:
 - [24-hr PSI](https://data.gov.sg/datasets/d_fe37906a0182569d891506e815e819b7/view) - same issue as above; provides overall PSI readings as well as its constituents, out of which PM10 is probably of more interest since the others are often way below WHO guidelines.
 
 Additional notes (for both endpoints)
-1. Granularity is limited to 5 regions (North, South, East, West, Central), but only an arbitrary lat/long coordinate is provided for each region (i.e. no details about how boundary is drawn). 
-2. This gives "real-time" data as well as historical data, but for the latter it's probably more convenient to grab them [here](https://data.gov.sg/datasets?q=&query=pollutant&groups=&organization=&resultId=d_ec484d9610a22c57fa873b14f9baa57a).
-3. Data provenance: Unclear
+1. Data Provenance: Unclear
     - This [paper](https://www.mdpi.com/1660-4601/19/13/7728) mentions "22 air quality monitoring stations (18 monitor general ambient air quality and 4 monitor roadside air quality)" and cited this [2018 Annual Report from NEA](https://www.nea.gov.sg/docs/default-source/resource/publications/environmental-protection-division-annual-report/epd-report-2018-v4-(compressed).pdf). This [figure](https://www.researchgate.net/figure/Locations-of-22-air-quality-AQ-monitoring-stations-18-monitor-general-air-quality-and_fig2_361547149) gives you the location of the stations. However, they did not mention whether the 5 readings were derived from them (but they likely used the same 5-region data as what the API provides). So it remains hazy until someone from NEA comes to clear the air! 
     - Here's an [image](https://www.facebook.com/photo/?fbid=1281698854104527&set=a.164266095847814) of how one of the air quality monitoring stations looks like.
-4. Uptime: Generally reliable. There are rather frequently occurring maintenance windows (e.g. weekly-fortnightly) but the API remains available in some of these periods. 
-
+2. Uptime: Generally reliable. There are rather frequently occurring maintenance windows (e.g. weekly-fortnightly) but the API remains available in some of these periods. 
+3. Data Quality: Definitely better sited and calibrated than low-cost sensors used by laypeople. However, granularity is limited to 5 regions (North, South, East, West, Central), and only an arbitrary lat/long coordinate is provided for each region (i.e. no details about how boundary is drawn). 
+4. Other pointers
+    - This gives "real-time" data as well as historical data, but for the latter it's probably more convenient to grab them [here](https://data.gov.sg/datasets?q=&query=pollutant&groups=&organization=&resultId=d_ec484d9610a22c57fa873b14f9baa57a).
 
 #### Forecast
 
@@ -52,6 +51,31 @@ As of 17/10/26, NEA's haze microsite now shows this [in an image](https://www.ha
 
 **AirGradient**
 
+Provides haze-related (PM2.5, PM10), weather information (temperature, relative humidity) and other air quality measures (CO2). 
+
+There are 2 main ways to pull the data (**no need for token!**) and each has unique data fields on top of the above-mentioned:
+- Standard API: For example, `https://api.airgradient.com/public/api/v1/world/locations/180952/measures/current`
+  - Gives PM1, PM0.03 count, TVOC as well
+- Map API: For example, `https://map-data.airgradient.com/map/api/v1/locations/360/measures/history?measure=pm25&start=2026-10-10T20%3A01%3A00.000Z&end=2026-10-11T20%3A01%3A00.000Z&bucketSize=15m `
+  - Gives O3 and NO2 too
+
+These requires knowing the id / stationId, which needs to be filtered by latlong from `/public/api/v1/world/locations/measures/current` and `https://map-data.airgradient.com/map/api/v1/measurements/current/area?xmin=103.55&ymin=1.12&xmax=104.15&ymax=1.48&zoom=12&dataSources=AirGradient%2COpenAQ&sensorTypes=Reference%2CSmall%20Sensor` respectively. 
+
+
+Generally, using the latter is a better idea as
+1. It is **corrected for humidity**.
+2. It has more stations in SG.
+
+There is an option of using `openaq` but it misses out on some stations, see this for example around Clementi: [openaq](https://explore.openaq.org/?parameter=pm25&monitors=false#11.65/1.3242/103.8559), [airgradient](https://www.airgradient.com/map?zoom=13&long=103.82&lat=1.31&meas=ug_m3&wind_layer=false&fires_layer=false&map_theme=light&org=ag&embedded=false).
+
+
+Additional nodes
+
+1. Data Provenance: 
+  - It inherits the issues faced by low-cost sensors, but allieviates this by performing corrections / calibration to their raw data.
+  - You can take a look at their devices from [their website](https://www.airgradient.com/).
+2. Uptime: No significant issues so far. No clear mentions of API limits, though OpenAQ mentions 60 / minute. 
+3. Data Quality: Decent as it is already corrected. It generally matches the NEA readings quite well in periods of calm. 
 
 
 **AQICN** 
@@ -61,21 +85,22 @@ A single endpoint provides these air quality measurements (along with other weat
 2. PM10 - same as above
 3. PM1 - same as above
 
-
-Additional notes
 1. Getting the data *officially* involves accessing the API [here](https://aqicn.org/api/) and obtaining a token (might take 15 minutes for it to be activated after you get their email). API limits are very generous and more than sufficient for SG. 
     - Station IDs can be obtained by tapping on the station in the [map](https://aqicn.org/). 
     - Strangely, you need to [use A instead of @](https://github.com/home-assistant/core/issues/96865#issuecomment-1685421228) when setting the station ID parameter of the endpoint but this is actually documented on their website.
-2. If you plot the data (or just observe from the plot shown in the website) you will note that **some stations have weird oscillations**, so taking their reading at face value is not a good idea. In such cases, it will be better to use some form of moving average. 
-3. Data Provenance
+
+Additional notes
+
+1. Data Provenance
     1. Generally, they are from sensors that are likely cheaper and less sophisticated than what NEA uses. However, they give you more granularity in both space and time - you get a reading from a precise location and it gets updated every ~3 minutes. 
     2. The device looks like [this](https://aqicn.org/gaia/).
     3. Since it's handled by non-experts, it is not always reliable. Even though some [QC is done](https://aqicn.org/station/validation/@2791069/), it doesn't stop showing the station when it's reporting 500 AQI and the neighbours aren't. **You need to do your own sanity checks and filtering**. 
     4. [Their methodologies vary](https://www.channelnewsasia.com/singapore/haze-psi-aqi-air-quality-pm25-6452896) so you have to be careful:
-        1. The sensors actually record raw concentration (i.e. same units as what NEA reports), but the website [converts](https://aqicn.org/calculator/) it to AQI via [`instantcast`](https://aqicn.org/faq/2015-03-15/air-quality-nowcast-a-beginners-guide/). AQI follows a difference scale. You can easily undo this to get the raw numbers back, it's just 'segmented' linear interpolation (i.e. AQI scale is divided into bins because we want to determine which range of values is considered good/unhealthy/hazardous. Each bin has a range of concentration (e.g. 35.5-55.4) and a range of AQI (e.g. 101-150), so if the concentration is in the middle of the range i.e., 45, you simply get AQI of ~125 because that's the middle too).
+        1. The sensors actually record raw concentration (i.e. same units as what NEA reports), but the website [converts](https://aqicn.org/calculator/) it to AQI via [`instantcast`](https://aqicn.org/faq/2015-03-15/air-quality-nowcast-a-beginners-guide/). AQI follows a different scale. You can easily undo this to get the raw numbers back, it's just 'segmented' linear interpolation (i.e. AQI scale is divided into bins because we want to determine which range of values is considered good/unhealthy/hazardous. Each bin has a range of concentration (e.g. 35.5-55.4) and a range of AQI (e.g. 101-150), so if the concentration is in the middle of the range i.e., 45, you simply get AQI of ~125 because that's the middle too).
         2. Basically, the official concentration-to-AQI conversion uses a 24-hour window which clearly is not what laypeople like (people get angry when what they experience with their own eyes/nose is not reflected in the data; by the time the AQI alerts us we already took in hours of smoke - too late!). But for health advisories, the scientific studies they are based on use such windows. There are now studies that use smaller windows but it will take some time for *science* to come to a consensus so it's down to individuals to make informed decisions (i.e. official bodies aren't likely to make recommendations *not backed by science* and take responsibility for it) for ourselves.
-4. Uptime: Usually good, but their website can go down when the whole SG population is visiting their website (e.g. it was unavailable for a while on 17 Oct 2026 afternoon). Their API remains strong though!
-
+        3. So AQICN uses a 1-hour window
+2. Uptime: Usually good, but their website can go down when the whole SG population is visiting their website (e.g. it was unavailable for a while on 17 Oct 2026 afternoon). Their API remains strong though!
+3. Data Quality: If you plot the data (or just observe from the plot shown in the website) you will note that **some stations have weird oscillations**, so taking their reading at face value is not a good idea. In such cases, it will be better to use some form of moving average. Also, some stations have to be filtered out due to stale data or anomalously high readings. 
 
 ### Others
 
@@ -100,7 +125,7 @@ Additional notes
 - Multi-day forecast (based on satellite imaging of fires and smoke, wind and rain)
 - Did backtesting! 
 
-[hazelah.app](https://www.hazelah.app/map)
+[hazelah.app](https://www.hazelah.app/map) - [open-sourced!](https://github.com/sr33r00/haze-lah)
 - 5-day forecast (derived from Open-Meteo)
 - Shows the trend for number of hotspots per day
 - Live view (ground and satellite photos), cigarette equivalent, News
@@ -120,6 +145,8 @@ Additional notes
 - Has haze-related news
 
 ### Other fun projects
+
+- [Guess PM2.5 from images](https://alsttr.github.io/hazedle/)
 
 - [Online sentiment analysis](https://jadangpooiling.medium.com/listening-to-haze-using-sentimental-analytics-to-understand-public-response-in-malaysia-singapore-d1cff86a676e) - sentiment analysis on YouTube comments and Google Trends; see also a [2015 study from SMU](https://ink.library.smu.edu.sg/cgi/viewcontent.cgi?params=/context/sis_research/article/5397/&path_info=a_study_on_sg_haze.pdf)
 
