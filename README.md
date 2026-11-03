@@ -15,7 +15,7 @@ Basically, what's different is we've actually used the resources before so we ca
 - `README.md` - landing page
 - `overview.md` - cross-application resources
 - `/<application>` and `<application>.md` - Application-specific resources
-
+- `/stubs` - a collections of early drafts (Markdown files) without usage experience shared (i.e. just the links with brief description)
 
 # Contribute
 - PRs are very welcome and strongly encouraged! Share your work so that others can build on top of it and not repeat what you did. Especially if you have worked on one of the unexplored problems mentioned here!
