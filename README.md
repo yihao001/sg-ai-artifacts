@@ -11,6 +11,8 @@ What does this repo offer?
 
 Basically, what's different is we've actually used the resources before so we can tell you more about the usage experience, what to avoid, etc. so that you don't make the same mistakes.
 
+We also note the existing work people have done, so that you can avoid reinventing the wheel + build on top of them.
+
 # Sitemap
 - `README.md` - landing page
 - `overview.md` - cross-application resources
@@ -18,7 +20,7 @@ Basically, what's different is we've actually used the resources before so we ca
 - `/stubs` - a collections of early drafts (Markdown files) without usage experience shared (i.e. just the links with brief description)
 
 # Contribute
-- PRs are very welcome and strongly encouraged! Share your work so that others can build on top of it and not repeat what you did. Especially if you have worked on one of the unexplored problems mentioned here!
+- PRs are very welcome and strongly encouraged! Share your work so that others can build on top of it and not repeat what you did. Especially if you have worked on one of the unexplored problems mentioned here. Generally, we prefer featuring ground-up, open-sourced projects with significant novelty. If it is a commerical project, content not gated by paywalls should have significant value to the public. 
 - As vibe coding makes it significantly easier to spin up a project these days, we probably need some QC and careful curation at some point. For now, the core set of curated information is kept in the main markdown files (overview and application-specific ones) and we could have a `compiled.md` file which will collate public submissions.
 
 
