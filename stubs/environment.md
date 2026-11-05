@@ -1,0 +1,3 @@
+- [SGFish](https://apps.apple.com/sg/app/sgfish/id6790156355) - "900 local species with an 82.7% accuracy rate", seems to be only on iOS for now
+- [Plantofy](https://play.google.com/store/apps/details?id=com.plantofy.recognizer.mobile&hl=en_SG) - plant identification, seems tailored to SG
+- [BCRSTracking](https://github.com/TheDJVG/BCRSTracking) - Shows availability and capacity level of BCRS machines
