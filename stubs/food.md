@@ -1,0 +1,5 @@
+What to eat? 
+- [whattoeat](https://whattoeat.com.sg) - Pick an area and a vibe or some food suggestion to get precise manan spot suggestions. Has group voting functionality too.
+- [LunchSet SG](https://www.lunchset.sg) - Set lunch deals discovered from agents, with human vetting.
+
+Food recognition: There are some interesting [research](https://news.smu.edu.sg/news/2026/10/09/plate-pixel-better-nutrition-smu-backed-meal-decoder-tool-transforms-downtown) [from](https://research.smu.edu.sg/news/food-recognition-and-logging-new-research-focuses-local-singaporean-food) [SMU](https://ink.library.smu.edu.sg/cgi/viewcontent.cgi?params=/context/sis_research/article/5430/&path_info=4._FOODAI_FOOD_IMAGE_RECOGNITION_VIA_DEEP_LEARNING_FOR_SMART_FOOD_LOGGING__KDD2019_.pdf) but there doesn't seem to be any open-source datasets.
