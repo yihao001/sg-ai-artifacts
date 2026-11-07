@@ -4,3 +4,6 @@ Besides the litany of data science 101 projects/notebooks on HDB housing prices,
 
 Care for neighbours
 - [GoodHood](https://play.google.com/store/apps/details?id=sg.goodhood.app&hl=en_SG) - Give/get spare household items in your neighbourhood, or find help. Has Singpass verification and allows you to provide targetted help!
+
+Amenities 
+- [PlaySG](https://playsg.sg) - Find playgrounds around your neighbourhood. 
