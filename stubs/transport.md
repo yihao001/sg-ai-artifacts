@@ -4,7 +4,7 @@ General
 - [BusRouter SG](https://busrouter.sg) - View bus routes on a map! Also has sister sites such as [RailRouter](https://railrouter.sg) with station exits marked out and [TaxiRouter](https://taxirouter.sg) with taxi stands marked out.
 
 Finding places to meet others within reasonable travel times
-- [Meet Where Sia?](https://meet-where-sia.vercel.app) - input nearest station for each person and get suggestions about which area to meet and what to do there
+- [Meet Where Sia?](https://meet-where-sia.vercel.app) - input nearest station for each person and get suggestions about which area to meet and what to do there [\[Github\]](https://github.com/yewey2/meet-where-sia)
 - [meetgowhere](https://meetgowhere.vercel.app/) - last updated 3y ago, might not have TEL ; input is based on postal code [\[Github\]](https://github.com/gpng/meetgowhere)
 
 Fun
